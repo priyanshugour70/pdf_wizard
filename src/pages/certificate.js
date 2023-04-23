@@ -2,6 +2,29 @@ import { useState, useRef } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import moment from 'moment';
+import React from "react";
+import { useCountries } from "use-react-countries";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Input,
+  Button,
+  Typography,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import {
+  BanknotesIcon,
+  CreditCardIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/solid";
+
+
+
 
 export default function Certificate() {
   const nameRef = useRef(null);
@@ -41,21 +64,89 @@ const [iname, setIName] = useState('');
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-6">Certificate of Completion</h1>
+    <div className="flex flex-col items-center justify-center ">
 
-
-      <div className="p-8 border border-gray-400 max-w-md mx-auto" id="certificate">
-      <h1 className="text-2xl font-bold mb-4">Certificate of Completion</h1>
-      <p className="mb-4">This certificate is awarded to:</p>
-      <p className="font-semibold text-lg mb-4">{name}</p>
-      <p className="mb-4">For successfully completing the course:</p>
-      <p className="font-semibold text-lg mb-4">{cname}</p>
-      <p className="mb-4">Date of completion:</p>
-      <p className="font-semibold text-lg mb-4">{currentDate}</p>
-      <p className="text-gray-700 text-sm">This certificate is issued by <span className='font-semibold'>{iname}</span>.</p>
+    <>
+  {/* component */}
+  <div className="bg-white min-h-screen flex justify-center items-center">
+    <div className="space-y-16">
+      <div id="certificate" className="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+        <img
+          className="relative object-cover w-full h-full rounded-xl"
+          src="https://i.imgur.com/kGkSg1v.png"
+        />
+        <div className="w-full px-8 absolute top-8">
+          <div className="flex justify-between">
+            <div className="">
+              <p className="font-light">Name</p>
+              <p className="font-medium tracking-widest">{name}</p>
+            </div>
+            <img className="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png" />
+          </div>
+          <div className="pt-1">
+            <p className="font-light">Card Number</p>
+            <p className="font-medium tracking-more-wider">
+              {cname}
+            </p>
+          </div>
+          <div className="pt-6 pr-6">
+            <div className="flex justify-between">
+              <div className="">
+                <p className="font-light text-xs">Valid</p>
+                <p className="font-medium tracking-wider text-sm">11/15</p>
+              </div>
+              <div className="">
+                <p className="font-light text-xs">Expiry</p>
+                <p className="font-medium tracking-wider text-sm">{iname}</p>
+              </div>
+              <div className="">
+                <p className="font-light text-xs">CVV</p>
+                <p className="font-bold tracking-more-wider text-sm">···</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+        <img
+          className="relative object-cover w-full h-full rounded-xl"
+          src="https://i.imgur.com/Zi6v09P.png"
+        />
+        <div className="w-full px-8 absolute top-8">
+          <div className="flex justify-between">
+            <div className="">
+              <p className="font-light">Name</p>
+              <p className="font-medium tracking-widest">Karthik P</p>
+            </div>
+            <img className="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png" />
+          </div>
+          <div className="pt-1">
+            <p className="font-light">Card Number</p>
+            <p className="font-medium tracking-more-wider">
+              4642 3489 9867 7632
+            </p>
+          </div>
+          <div className="pt-6 pr-6">
+            <div className="flex justify-between">
+              <div className="">
+                <p className="font-light text-xs">Valid</p>
+                <p className="font-medium tracking-wider text-sm">11/15</p>
+              </div>
+              <div className="">
+                <p className="font-light text-xs text-xs">Expiry</p>
+                <p className="font-medium tracking-wider text-sm">03/25</p>
+              </div>
+              <div className="">
+                <p className="font-light text-xs">CVV</p>
+                <p className="font-bold tracking-more-wider text-sm">···</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
-
+  </div>
+</>
 
 
       <div className="mb-6">
@@ -63,17 +154,17 @@ const [iname, setIName] = useState('');
         <input type="text" id="name" value={name} onChange={handleInputChange} className="border px-2 py-1 rounded" />
       </div>
       <div className="mb-6">
-        <label htmlFor="cname" className="mr-2">Enter Your Course Name:</label>
+        <label htmlFor="cname" className="mr-2">Enter Your Card Number :</label>
         <input type="text" id="cname" value={cname} onChange={handleInputChange1} className="border px-2 py-1 rounded" />
       </div>
       <div className="mb-6">
-        <label htmlFor="iname" className="mr-2">Enter Issuer Name:</label>
+        <label htmlFor="iname" className="mr-2">Enter Expier Date :</label>
         <input type="text" id="iname" value={iname} onChange={handleInputChange2} className="border px-2 py-1 rounded" />
       </div>
 
 
       <button onClick={handleDownload} className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Download Certificate
+        Download Card
       </button>
     </div>
   );
